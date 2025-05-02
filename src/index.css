@@ -1,0 +1,45 @@
+:root {
+  --cyan: #2acfcf;
+  --dark-violet: #3b3054;
+  --red: #f46262;
+  --gray: #bfbfbf;
+  --grayish-violet: #9e9aa7;
+  --very-dark-blue: #35323e;
+  --very-dark-violet: #232127;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--very-dark-blue);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
