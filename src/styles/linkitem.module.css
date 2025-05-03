@@ -1,0 +1,108 @@
+.linkItem {
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .originalLink {
+    color: var(--very-dark-violet);
+    border-bottom: 1px solid #f0f1f6;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .shortLinkContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .shortLink {
+    color: var(--cyan);
+    font-weight: 500;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .copyButton {
+    background-color: var(--cyan);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-weight: 700;
+    transition: background-color 0.3s;
+  }
+  
+  .copyButton:hover {
+    background-color: #9be3e3;
+  }
+  
+  .copied {
+    background-color: var(--dark-violet);
+  }
+  
+  .copied:hover {
+    background-color: var(--dark-violet);
+  }
+  
+  .deleteButton {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-weight: 700;
+    transition: background-color 0.3s;
+  }
+  
+  .deleteButton:hover {
+    background-color: #ff8a8a;
+  }
+  
+  @media (min-width: 768px) {
+    .linkItem {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+    }
+  
+    .originalLink {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      margin-right: 1.5rem;
+      flex: 1;
+    }
+  
+    .shortLinkContainer {
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .shortLink {
+      margin-right: 1.5rem;
+    }
+  
+    .buttonGroup {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+  
+    .copyButton,
+    .deleteButton {
+      min-width: 100px;
+    }
+  }
+  

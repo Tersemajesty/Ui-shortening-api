@@ -1,0 +1,127 @@
+.features {
+    background-color: #f0f1f6;
+    padding: 3rem 0 5rem;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  
+  .heading h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--very-dark-violet);
+    margin-bottom: 1rem;
+  }
+  
+  .heading p {
+    color: var(--grayish-violet);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  
+  .featureCards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+  
+  .connectingLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background-color: var(--cyan);
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  
+  .featureCard {
+    background-color: white;
+    border-radius: 5px;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .iconContainer {
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--dark-violet);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .iconContainer svg {
+    color: white;
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .featureCard h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--very-dark-violet);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .featureCard p {
+    color: var(--grayish-violet);
+    text-align: center;
+  }
+  
+  @media (min-width: 768px) {
+    .featureCards {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .connectingLine {
+      left: 0;
+      right: 0;
+      top: 50%;
+      bottom: auto;
+      width: auto;
+      height: 8px;
+      transform: translateY(-50%);
+    }
+  
+    .card1 {
+      margin-top: 0;
+    }
+  
+    .card2 {
+      margin-top: 2.5rem;
+    }
+  
+    .card3 {
+      margin-top: 5rem;
+    }
+  
+    .iconContainer {
+      left: 2rem;
+      transform: none;
+    }
+  
+    .featureCard h3,
+    .featureCard p {
+      text-align: left;
+    }
+  }
+  

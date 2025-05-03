@@ -4,7 +4,7 @@ import Hero from '../component/Hero'
 import Header from '../component/Header'
 import Footer from '../component/Footer'
 import LinkItem from '../component/LinkItem'
-import Shortener from '../component/shortener'
+import Shortener from '../component/Shortener'
 
  const Home = () => {
     return (

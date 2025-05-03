@@ -15,11 +15,11 @@ export default function Header() {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to="/">Shortly</Link> {/* ✅ Changed href to 'to' */}
+          <Link to="/">Shortly</Link>
         </div>
 
         <nav className="desktopNav">
-          <a href="#features">Features</a> {/* internal sections can remain anchor tags */}
+          <a href="#features">Features</a> 
           <a href="#">Pricing</a>
           <a href="#">Resources</a>
         </nav>
