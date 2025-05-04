@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router'
     
         try {
           await login(email, password)
-          navigate("/dashboard")
+          navigate("/home")
         } catch (err) {
           setError(err.message || "Failed to login. Please check your credentials.")
         } finally {

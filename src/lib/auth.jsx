@@ -8,15 +8,19 @@ export async function loginUser(email, password) {
       throw new Error("Invalid email format")
     }
   
-    if (password !== "password") {
-      throw new Error("Invalid credentials")
-    }
+    // if (password !== "password") {
+    //   throw new Error("Invalid credentials")
+    // }
   
     // Create a mock user
-    const user = {
-      id: "user_" + Math.random().toString(36).substr(2, 9),
-      name: email.split("@")[0],
-      email: email,
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+  
+    if (!user) {
+      throw new Error("Invalid credentials");
     }
   
     // Store in localStorage for persistence
@@ -36,15 +40,25 @@ export async function loginUser(email, password) {
     }
   
     // Create a mock user
-    const user = {
-      id: "user_" + Math.random().toString(36).substr(2, 9),
-      name: name,
-      email: email,
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const existingUser = users.find((user) => user.email === email);
+    if (existingUser) {
+      throw new Error("User already exists");
     }
   
+    const newUser = {
+      id: "user_" + Math.random().toString(36).substr(2, 9),
+      name,
+      email,
+      password,
+    };
+  
     // Store in localStorage for persistence
-    localStorage.setItem("auth_token", "mock_token_" + user.id)
-    localStorage.setItem("user", JSON.stringify(user))
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("auth_token", "mock_token_" + newUser.id);
+    localStorage.setItem("user", JSON.stringify(newUser));
   
     return user
   }

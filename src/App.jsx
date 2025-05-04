@@ -8,15 +8,15 @@ import Login from './auth/login';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Signup />,
   },
   {
     path: "/home",
     element: <Home />,
   },
   {
-    path: "/signup",
-    element: <Signup />,
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
