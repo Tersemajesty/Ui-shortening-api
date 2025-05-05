@@ -8,15 +8,15 @@ import Signup from "./Auth/Signup"
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signup />,
+    element: <Signup/>,
   },
   {
     path: "/home",
-    element: <Home />,
+    element: <Home/>,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login/>,
   },
 ]);
 
