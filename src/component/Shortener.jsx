@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/shortener.module.css'
 import { useAuth } from "../context/AuthContext"
-import LinkItem from './LinkItem' 
+import LinkItem from './LinkItem'
+import { toast } from 'react-toastify'
 
 export default function Shortener() {
-  const [url, setUrl] = useState("")
+  const [url, setUrl] = useState('')
+  const [shortUrl, setShortUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
   const [links, setLinks] = useState([])
   const { user } = useAuth()
 
-  // Load saved links from localStorage on component mount
   useEffect(() => {
     const savedLinks = localStorage.getItem("shortened_links")
     if (savedLinks) {
@@ -23,79 +24,48 @@ export default function Shortener() {
     }
   }, [])
 
-  // Save links to localStorage whenever they change
   useEffect(() => {
     if (links.length > 0) {
       localStorage.setItem("shortened_links", JSON.stringify(links))
     }
   }, [links])
 
-  const isValidUrl = (string) => {
-    try {
-      // Make sure URL has a protocol
-      if (!string.match(/^https?:\/\//i)) {
-        string = "https://" + string
-      }
-      new URL(string)
-      return { valid: true, url: string }
-    } catch (_) {
-      return { valid: false, url: string }
-    }
-  }
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+    setError('')
 
-    // Reset error state
-    setError("")
-
-    // Validate URL
     if (!url) {
-      setError("Please add a link")
+      toast.error("Please enter a URL")
       return
     }
 
-    const urlValidation = isValidUrl(url)
-    if (!urlValidation.valid) {
-      setError("Please enter a valid URL")
+    // Validate URL
+    try {
+      new URL(url)
+    } catch (_) {
+      toast.error("Please enter a valid URL")
       return
     }
 
     setIsLoading(true)
 
-    try {
-      // Using shrtco.de API for URL shortening
-      const apiUrl = `https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(urlValidation.url)}`
-      console.log("Calling API:", apiUrl) // Debug log
-
-      const response = await fetch(apiUrl)
-      const data = await response.json()
-
-      console.log("API Response:", data) // Debug log
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to shorten URL")
-      }
-
-      if (!data.ok) {
-        throw new Error(data.error || "API returned an error")
-      }
+    setTimeout(() => {
+      const randomCode = Math.random().toString(36).substring(2, 7)
+      const short = `https://snpy.io/${randomCode}`
 
       const newLink = {
-        original: urlValidation.url,
-        short: data.result.full_short_link,
+        original: url,
+        short,
         userId: user?.id || "anonymous",
         createdAt: new Date().toISOString(),
       }
 
       setLinks([newLink, ...links])
-      setUrl("")
-    } catch (err) {
-      console.error("Error shortening URL:", err)
-      setError(err.message || "Failed to shorten URL. Please try again later.")
-    } finally {
+      setShortUrl(short)
+      setUrl('')
       setIsLoading(false)
-    }
+      toast.success("URL shortened successfully!")
+    }, 1000)
   }
 
   const deleteLink = (index) => {
@@ -103,6 +73,13 @@ export default function Shortener() {
     newLinks.splice(index, 1)
     setLinks(newLinks)
     localStorage.setItem("shortened_links", JSON.stringify(newLinks))
+  }
+
+  const copyToClipboard = () => {
+    if (shortUrl) {
+      navigator.clipboard.writeText(shortUrl)
+      toast.success('Copied to clipboard!')
+    }
   }
 
   return (
@@ -125,6 +102,13 @@ export default function Shortener() {
             </button>
           </form>
         </div>
+
+        {shortUrl && (
+          <div className={styles.copyContainer}>
+            <p><strong>Shortened URL:</strong> <a href={shortUrl} target="_blank" rel="noopener noreferrer">{shortUrl}</a></p>
+            <button onClick={copyToClipboard} className={styles.copyButton}>Copy</button>
+          </div>
+        )}
 
         {links.length > 0 && (
           <div className={styles.results}>
